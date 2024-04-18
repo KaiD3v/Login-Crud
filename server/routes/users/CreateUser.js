@@ -8,16 +8,20 @@ export async function CreateUser(app) {
       const collection = database.collection("Clients");
 
       // buscar credenciais do body e fazer o post no banco de dados
-      const { userName, userEmail, userPassword, confirmUserPassword } =
+      const { userName, userEmail, userPassword, confirmUserPassword, isAdmin } =
         req.body;
 
       // criando hash da senha
       const hashedUserPassword = await bcrypt.hash(userPassword, 10);
 
+      // Definir isAdmin como false se não estiver presente no corpo da requisição
+      const isAdminUser = isAdmin || false;
+
       const newUser = {
         userName: userName,
         userEmail: userEmail,
         userPassword: hashedUserPassword,
+        isAdmin: isAdminUser
       };
 
       // verificar se e-mail já existe

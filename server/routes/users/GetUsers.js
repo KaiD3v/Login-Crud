@@ -7,7 +7,7 @@ export async function GetUsers(app) {
       const collection = await database.collection("Clients");
 
       // buscar usuários
-      const users = await collection.find({}, { projection: { userEmail: 1, userName: 1, _id: 1 } }).toArray();
+      const users = await collection.find({}).toArray();
 
       res.status(200).send({ message: "Users List:", users: users });
     } catch (err) {
