@@ -3,6 +3,7 @@ import { CreateUser } from "./routes/users/CreateUser.js";
 import { connectDb } from "./db/mongodb.js";
 import { GetUsers } from "./routes/users/GetUsers.js";
 import { GetUser } from "./routes/users/GetUser.js";
+import { DeleteUser } from "./routes/users/DeleteUser.js";
 
 const app = fastify();
 
@@ -10,6 +11,7 @@ const app = fastify();
 app.register(CreateUser)
 app.register(GetUsers)
 app.register(GetUser)
+app.register(DeleteUser)
 
 const start = async () => {
   try {

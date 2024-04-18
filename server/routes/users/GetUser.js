@@ -19,7 +19,7 @@ export async function GetUser(app) {
       } else {
         res.status(404).send({ message: "User not found." });
       }
-      res.status(201).send({ message: "User:", user: user });
+      res.status(200).send({ message: "User:", user: user });
     } catch (err) {
       console.log("Error while getting user:", err);
       res.status(500).send("Internal server error!");
