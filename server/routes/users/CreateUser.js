@@ -1,4 +1,5 @@
 import { database } from "../../db/mongodb.js";
+import bcrypt from 'bcrypt'
 
 export async function CreateUser(app) {
   app.post("/register", async (req, res) => {
@@ -10,10 +11,13 @@ export async function CreateUser(app) {
       const { userName, userEmail, userPassword, confirmUserPassword } =
         req.body;
 
+      // criando hash da senha
+      const hashedUserPassword = await bcrypt.hash(userPassword, 10)
+
       const newUser = {
         userName: userName,
         userEmail: userEmail,
-        userPassword: userPassword,
+        userPassword: hashedUserPassword,
       };
 
       // verificar se e-mail já existe
