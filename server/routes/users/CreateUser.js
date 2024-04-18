@@ -1,5 +1,5 @@
 import { database } from "../../db/mongodb.js";
-import bcrypt from 'bcrypt'
+import bcrypt from "bcrypt";
 
 export async function CreateUser(app) {
   app.post("/register", async (req, res) => {
@@ -12,7 +12,7 @@ export async function CreateUser(app) {
         req.body;
 
       // criando hash da senha
-      const hashedUserPassword = await bcrypt.hash(userPassword, 10)
+      const hashedUserPassword = await bcrypt.hash(userPassword, 10);
 
       const newUser = {
         userName: userName,
