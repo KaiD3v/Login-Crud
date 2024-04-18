@@ -1,7 +1,11 @@
 import fastify from "fastify";
+import { CreateUser } from "./routes/users/CreateUser.js";
 import { connectDb } from "./db/mongodb.js";
 
 const app = fastify();
+
+//routes
+app.register(CreateUser)
 
 const start = async () => {
   try {
