@@ -20,7 +20,7 @@
       </div>
     </nav>
     <div class="login-content">
-      <form class="login-form" method="post" action="/login">
+      <form class="login-form" id="login-form" method="post">
         <label for="email"> E-Mail </label>
         <input
           type="email"
@@ -39,32 +39,39 @@
       </form>
     </div>
 
-    <script defer>
-      document.addEventListener('DOMContentLoaded', function() {
-        document
-          .querySelector("#login-form")
-          .addEventListener("submit", function (e) {
-            const formData = new FormData(this);
+    <script>
+      document
+        .getElementById("login-form")
+        .addEventListener("submit", async function (event) {
+          event.preventDefault();
 
-            fetch("http://localhost:3000/login", {
+          const formData = {
+            userEmail: document.getElementById("userEmail").value,
+            userPassword: document.getElementById("userPassword").value,
+          };
+
+          const url = "http://localhost:3000/login";
+          try {
+            const response = await fetch(url, {
               method: "POST",
-              body: formData,
-            })
-              .then((response) => {
-                if (!response.ok) {
-                  throw new Error("Erro ao fazer a solicitação.");
-                }
-                return response.json();
-              })
-              .then((data) => {
-                console.log(data);
-                // Lidar com a resposta do servidor aqui
-              })
-              .catch((error) => {
-                console.error("Erro:", error);
-              });
-          });
-      });
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(formData),
+            });
+
+            if (!response.ok) {
+              throw new Error("Erro ao fazer login");
+            }
+
+            const token = await response.json();
+            localStorage.setItem("token", token.token);
+
+            console.log("Token de autenticação:", token.token);
+          } catch (error) {
+            console.error("Erro ao fazer login:", error);
+          }
+        });
     </script>
   </body>
 </html>

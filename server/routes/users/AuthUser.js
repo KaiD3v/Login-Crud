@@ -26,7 +26,7 @@ export async function AuthUser(app) {
 
       const token = jwt.sign({ userId: user._id }, "USER TOKEN");
 
-      return res.status(200).send(token);
+      return res.status(200).send({token: token});
     } catch (err) {
       console.log("Error while authenticate user:", err);
       return res.status(500).send("Internal server error!");

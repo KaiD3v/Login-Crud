@@ -5,18 +5,20 @@ import { GetUsers } from "./routes/users/GetUsers.js";
 import { GetUser } from "./routes/users/GetUser.js";
 import { DeleteUser } from "./routes/users/DeleteUser.js";
 import { AuthUser } from "./routes/users/AuthUser.js";
+import cors from "@fastify/cors";
 import fastifyFormbody from "@fastify/formbody";
 
 const app = fastify();
-app.register(fastifyFormbody)
-
+app.register(fastifyFormbody);
+app.register(cors, {
+  origin: '*'
+})
 //routes
-app.register(CreateUser)
-app.register(GetUsers)
-app.register(GetUser)
-app.register(DeleteUser)
-app.register(AuthUser)
-
+app.register(CreateUser);
+app.register(GetUsers);
+app.register(GetUser);
+app.register(DeleteUser);
+app.register(AuthUser);
 
 const start = async () => {
   try {
@@ -24,7 +26,7 @@ const start = async () => {
     console.log("Server running on port: 3000");
   } catch (err) {
     console.error("Error while running server:", err);
-    process.exit()
+    process.exit();
   }
 };
 
