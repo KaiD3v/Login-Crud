@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login Page</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <nav class="nav-bar">
+      <p>
+        Xupingas
+        <span> Enterprise </span>
+      </p>
+      <div class="enter-container">
+        <a href="/users">Users</a>
+        <a href="/admin">Admin</a>
+        <a href="/register">Register</a>
+        <a href="/client/src/login.html">Login</a>
+      </div>
+    </nav>
+    <div class="login-content">
+      <form class="login-form" method="post" action="/login">
+        <label for="email"> E-Mail </label>
+        <input
+          type="email"
+          name="userEmail"
+          id="userEmail"
+          placeholder="Seu E-Mail"
+        />
+        <label for="password">Senha</label>
+        <input
+          type="password"
+          name="userPassword"
+          id="userPassword"
+          placeholder="Sua senha"
+        />
+        <input type="submit" value="Entrar" />
+      </form>
+    </div>
+
+    <script defer>
+      document.addEventListener('DOMContentLoaded', function() {
+        document
+          .querySelector("#login-form")
+          .addEventListener("submit", function (e) {
+            const formData = new FormData(this);
+
+            fetch("http://localhost:3000/login", {
+              method: "POST",
+              body: formData,
+            })
+              .then((response) => {
+                if (!response.ok) {
+                  throw new Error("Erro ao fazer a solicitação.");
+                }
+                return response.json();
+              })
+              .then((data) => {
+                console.log(data);
+                // Lidar com a resposta do servidor aqui
+              })
+              .catch((error) => {
+                console.error("Erro:", error);
+              });
+          });
+      });
+    </script>
+  </body>
+</html>

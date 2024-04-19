@@ -11,8 +11,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@fastify/formbody": "^7.4.0",
     "bcrypt": "^5.1.1",
     "fastify": "^4.26.2",
+    "fastify-formbody": "^5.3.0",
     "jsonwebtoken": "^9.0.2",
     "mongodb": "^6.5.0",
     "nodemon": "^3.1.0"
