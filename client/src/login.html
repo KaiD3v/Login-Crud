@@ -13,14 +13,15 @@
         <span> Enterprise </span>
       </p>
       <div class="enter-container">
-        <a href="/users">Users</a>
+        <a href="/client/src/users.html">Users</a>
         <a href="/admin">Admin</a>
-        <a href="/register">Register</a>
+        <a href="/client/src/register.html">Register</a>
         <a href="/client/src/login.html">Login</a>
       </div>
     </nav>
     <div class="login-content">
       <form class="login-form" id="login-form" method="post">
+        <h1>Faça Login!</h1>
         <label for="email"> E-Mail </label>
         <input
           type="email"
@@ -35,7 +36,9 @@
           id="userPassword"
           placeholder="Sua senha"
         />
-        <input type="submit" value="Entrar" />
+        <p id="login-message-output" class="hidden"></p>
+        <button type="submit">Entrar</button>
+        <a href="../src/register.html">Cadastre-se aqui!</a>
       </form>
     </div>
 
@@ -49,6 +52,7 @@
             userEmail: document.getElementById("userEmail").value,
             userPassword: document.getElementById("userPassword").value,
           };
+          const messageOutput = document.getElementById("login-message-output");
 
           const url = "http://localhost:3000/login";
           try {
@@ -65,11 +69,14 @@
             }
 
             const token = await response.json();
-            localStorage.setItem("token", token.token);
-
+            await localStorage.setItem("token", token.token);
+            window.location.href = "/client/src/users.html";
             console.log("Token de autenticação:", token.token);
           } catch (error) {
             console.error("Erro ao fazer login:", error);
+
+            messageOutput.innerText = error;
+            messageOutput.classList.replace("hidden", "login-message-output");
           }
         });
     </script>

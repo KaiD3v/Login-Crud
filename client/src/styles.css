@@ -4,25 +4,25 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-form{
-    display: flex;
-    flex-direction: column;
-    background-color: #363030;
-    padding: 10rem 5rem;
-    gap: 5px;
-    border: solid 1px;
-    border-radius: .5rem;
+.login-form {
+  display: flex;
+  flex-direction: column;
+  background-color: #363030;
+  padding: 10rem 5rem;
+  gap: 5px;
+  border: solid 1px;
+  border-radius: 0.5rem;
 }
 
-form input{
-    padding: 5px 20px;
-    border: solid 1px;
-    border-radius: 5px;
+form input {
+  padding: 5px 20px;
+  border: solid 1px;
+  border-radius: 5px;
 }
 
-form input[type="submit"] {
-    cursor: pointer;
-  }
+form button {
+  cursor: pointer;
+}
 
 nav {
   border-bottom: solid black 2px;
@@ -60,7 +60,6 @@ a {
   background-color: black;
   width: 100%;
   height: 2px;
-
 }
 
 .content {
@@ -72,10 +71,37 @@ a {
 }
 
 .login-content {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 70vh;
-    text-align: initial;
-  }
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 90vh;
+  text-align: initial;
+}
+
+.register-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 90vh;
+  text-align: initial;
+}
+
+.register-form {
+  display: flex;
+  flex-direction: column;
+  background-color: #363030;
+  padding: 5rem 5rem;
+  gap: 5px;
+  border: solid 1px;
+  border-radius: 0.5rem;
+}
+
+.login-message-output {
+  display: block;
+}
+
+.hidden {
+  display: none;
+}

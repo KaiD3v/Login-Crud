@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Registro</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <nav class="nav-bar">
+      <p>
+        Xupingas
+        <span> Enterprise </span>
+      </p>
+      <div class="enter-container">
+        <a href="/client/src/users.html">Users</a>
+        <a href="/admin">Admin</a>
+        <a href="/client/src/register.html">Register</a>
+        <a href="/client/src/login.html">Login</a>
+      </div>
+    </nav>
+    <div class="register-content">
+      <form class="register-form" id="register-form" method="post">
+        <h1>Faça Registro!</h1>
+        <label for="userName"> Nome </label>
+        <input
+          type="text"
+          name="userName"
+          id="userName"
+          placeholder="Seu nome de usuário!"
+        />
+        <label for="userEmail"> E-Mail </label>
+        <input
+          type="email"
+          name="userEmail"
+          id="userEmail"
+          placeholder="Seu E-Mail"
+        />
+        <label for="userPassword">Senha</label>
+        <input
+          type="password"
+          name="userPassword"
+          id="userPassword"
+          placeholder="Sua senha"
+        />
+        <input
+          type="password"
+          name="userPassword"
+          id="confirmUserPassword"
+          placeholder="Repita sua senha!"
+        />
+        <p id="register-message-output" class="hidden"></p>
+        <button type="submit">Registrar</button>
+        <a href="../src/login.html">Já possui conta? entre aqui!</a>
+      </form>
+    </div>
+    <script defer>
+      document
+        .getElementById("register-form")
+        .addEventListener("submit", async (event) => {
+          event.preventDefault();
+          // buscar infos do body
+          const formData = {
+            userName: document.getElementById("userName").value,
+            userEmail: document.getElementById("userEmail").value,
+            userPassword: document.getElementById("userPassword").value,
+            confirmUserPassword: document.getElementById("confirmUserPassword")
+              .value,
+          };
+          const messageOutput = document.getElementById(
+            "register-message-output"
+          );
+          const url = "http://localhost:3000/register";
+
+          // fazer requisição na api
+          try {
+            const response = await fetch(url, {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(formData),
+            });
+
+            if (!response.ok) {
+              throw new Error("Erro ao cadastrar usuário");
+            }
+
+            messageOutput.innerText = "Cadastro Efetivado!";
+            messageOutput.classList.replace(
+              "hidden",
+              "register-message-output"
+            );
+            console.log("Conta criada com sucesso!");
+          } catch (error) {
+            console.error("Erro ao cadastrar usuário:", error);
+
+            messageOutput.innerText = error.message;
+            messageOutput.classList.replace(
+              "hidden",
+              "register-message-output"
+            );
+          }
+        });
+    </script>
+  </body>
+</html>
