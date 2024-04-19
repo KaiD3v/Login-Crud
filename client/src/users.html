@@ -1,26 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Users Page</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
     <nav class="nav-bar">
-        <p>
-          Xupingas
-          <span> Enterprise </span>
-        </p>
-        <div class="enter-container">
-          <a href="/client/src/users.html">Users</a>
-          <a href="/admin">Admin</a>
-          <a href="/client/src/register.html">Register</a>
-          <a href="/client/src/login.html">Login</a>
-        </div>
-      </nav>
-      <div class="users-page-content">
-        <h1>Página de Usuários</h1>
+      <p>
+        Xupingas
+        <span> Enterprise </span>
+      </p>
+      <div class="enter-container">
+        <a href="/client/src/users.html">Users</a>
+        <a href="/admin">Admin</a>
+        <a href="/client/src/register.html">Register</a>
+        <a href="/client/src/login.html">Login</a>
       </div>
-</body>
+    </nav>
+    <div class="users-page-container">
+      <h1>Página de Usuários</h1>
+      <p id="user-page-message-output" class="hidden">
+        Cadastre-se para acessar esta página!
+      </p>
+      <div id="user-page-content" class="user-page-content">
+        <p>
+          Ai meu cuzinho
+        </p>
+      </div>
+    </div>
+    <script defer>
+      document.addEventListener("DOMContentLoaded", () => {
+        const outputMessage = document.getElementById(
+          "user-page-message-output"
+        );
+        const userPageContent = document.getElementById('user-page-content')
+        const token = localStorage.getItem("token");
+        if (!token) {
+          outputMessage.classList.replace("hidden", "login-message-output");
+          userPageContent.classList.replace("user-page-content", "hidden")
+        }
+      });
+    </script>
+  </body>
 </html>
