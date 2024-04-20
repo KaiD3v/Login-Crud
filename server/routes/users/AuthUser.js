@@ -24,9 +24,11 @@ export async function AuthUser(app) {
         return res.status(401).send({ message: "Wrong Password!" });
       }
 
-      const token = jwt.sign({ userId: user._id }, "USER TOKEN");
-
-      return res.status(200).send({token: token});
+      const token = jwt.sign(
+        { userId: user._id, isAdmin: user.isAdmin },
+        "USER TOKEN"
+      );
+      return res.status(200).send({ token: token, isAdmin: user.isAdmin });
     } catch (err) {
       console.log("Error while authenticate user:", err);
       return res.status(500).send("Internal server error!");

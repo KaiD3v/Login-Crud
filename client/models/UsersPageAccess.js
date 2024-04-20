@@ -8,7 +8,8 @@ document.addEventListener("DOMContentLoaded", () => {
     userPageContent.classList.replace("user-page-content", "hidden");
   }
   exitLogin.addEventListener("click", async () => {
-    await localStorage.removeItem("token");
-    await location.reload();
+    localStorage.removeItem("token");
+    localStorage.removeItem("isAdmin");
+    location.reload();
   });
 });
